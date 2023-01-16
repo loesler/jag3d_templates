@@ -24,7 +24,7 @@
 <#-- Create list of points -->
 <#if point_groups??>
 	${header_id?left_pad(15, " ")}<#t>
-	${header_type?right_pad(15, " ")}<#t>
+	${header_type?left_pad(15, " ")}<#t>
 	${header_east?left_pad(15, " ")}<#t>
 	${header_north?left_pad(15, " ")}<#t>
 	${header_up?left_pad(15, " ")}<#t>
@@ -45,7 +45,7 @@
 		</#if>
 		<#list group.points as point>
 				${point.name?left_pad(15, " ")}<#t>
-				${point_type?right_pad(15, " ")}<#t>
+				${point_type?left_pad(15, " ")}<#t>
 				<#if group.dimension != 1>
 					<@printFormattedNumber value=point.y format=df_length/>
 					<@printFormattedNumber value=point.x format=df_length/>
@@ -70,6 +70,7 @@
 				<#else>
 					${empty_value?left_pad(15, " ")}<#t>
 				</#if>
+				
 		</#list>
 	</#list>
 </#if>
