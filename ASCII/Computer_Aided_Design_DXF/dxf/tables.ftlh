@@ -1,31 +1,18 @@
-<#macro add_layer name line_type='Solid' line_width=35 color=0>
-LAYER
-5
-${to_hex(handle())}
-100
-AcDbSymbolTableRecord
-100
-AcDbLayerTableRecord
-2
-<#lt>${name}
-6
-<#lt>${line_type}
-370
-${line_widths?seq_contains(line_width)?string(line_width, -3)}
-62
-<#if color gte 0 && color lte 256>
-${color?floor}
-<#else>
-0
-</#if>
-70
-0
-390
-0
-0
-<#return>
-</#macro>
-0
+<#assign viewport_center_x = 0>
+<#assign viewport_center_y = 0>
+<#assign viewport_center_scale = 1000.0>
+
+<#assign dxf_layers = [
+    {"name" : "0",            "line_type": "Solid", "line_width": -3, "color" : 0},
+    {"name" : "Coordinates",  "line_type": "Solid", "line_width": -3, "color" : 0},
+    {"name" : "Observations", "line_type": "Solid", "line_width": -3, "color" : 0},
+    {"name" : "Names",        "line_type": "Solid", "line_width": -3, "color" : 0},
+    {"name" : "Confidences",  "line_type": "Solid", "line_width": -3, "color" : 0}
+]>
+
+
+<#function to_string>
+	<#assign str = "0
 SECTION
 2
 TABLES
@@ -34,7 +21,7 @@ TABLE
 2
 VPORT
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTable
 70
@@ -42,7 +29,7 @@ AcDbSymbolTable
 0
 VPORT
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTableRecord
 100
@@ -58,23 +45,11 @@ AcDbViewportTableRecord
 21
 1
 12
-<#if viewport_center_x??>
-<@printFormattedNumber value=viewport_center_x format=resolution/>
-<#else>
-0
-</#if>
+${utils.print_formatted_number(viewport_center_x)}
 22
-<#if viewport_center_y??>
-<@printFormattedNumber value=viewport_center_y format=resolution/>
-<#else>
-0
-</#if>
+${utils.print_formatted_number(viewport_center_y)}
 40
-<#if viewport_center_scale??>
-<@printFormattedNumber value=viewport_center_scale format=resolution/>
-<#else>
-0
-</#if>
+${utils.print_formatted_number(viewport_center_scale)}
 70
 0
 0
@@ -84,7 +59,7 @@ TABLE
 2
 LTYPE
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTable
 70
@@ -92,7 +67,7 @@ AcDbSymbolTable
 0
 LTYPE
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTableRecord
 100
@@ -110,7 +85,7 @@ Solid
 0
 LTYPE
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTableRecord
 100
@@ -128,7 +103,7 @@ ByBlock
 0
 LTYPE
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTableRecord
 100
@@ -150,24 +125,25 @@ TABLE
 2
 LAYER
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTable
 70
-5  <#-- number of laysers -->
+${dxf_layers?size}
 0
-<@add_layer name='0'            />
-<@add_layer name='Coordinates'  />
-<@add_layer name='Observations' />
-<@add_layer name='Point_names'  />
-<@add_layer name='Confidences'  />
-ENDTAB
+">
+
+<#list dxf_layers as layer>
+  <#assign str += utils.add_layer(layer.name, layer.line_type, layer.line_width, layer.color) + "\r\n">
+</#list>
+
+<#assign str += "ENDTAB
 0
 TABLE
 2
 STYLE
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTable
 70
@@ -179,7 +155,7 @@ TABLE
 2
 VIEW
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTable
 70
@@ -191,7 +167,7 @@ TABLE
 2
 UCS
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTable
 70
@@ -203,7 +179,7 @@ TABLE
 2
 APPID
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTable
 70
@@ -211,7 +187,7 @@ AcDbSymbolTable
 0
 APPID
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTableRecord
 100
@@ -227,7 +203,7 @@ TABLE
 2
 DIMSTYLE
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTable
 70
@@ -243,7 +219,7 @@ TABLE
 2
 BLOCK_RECORD
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTable
 70
@@ -251,7 +227,7 @@ AcDbSymbolTable
 0
 BLOCK_RECORD
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTableRecord
 100
@@ -267,7 +243,7 @@ AcDbBlockTableRecord
 0
 BLOCK_RECORD
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbSymbolTableRecord
 100
@@ -283,4 +259,6 @@ AcDbBlockTableRecord
 0
 ENDTAB
 0
-ENDSEC
+ENDSEC">
+	<#return str/>
+</#function>

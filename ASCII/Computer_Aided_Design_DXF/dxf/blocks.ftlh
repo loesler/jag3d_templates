@@ -1,11 +1,12 @@
-0
+<#function to_string>
+	<#assign str = "0
 SECTION
 2
 BLOCKS
 0
 BLOCK
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbEntity
 8
@@ -29,7 +30,7 @@ AcDbBlockBegin
 0
 ENDBLK
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbEntity
 8
@@ -39,7 +40,7 @@ AcDbBlockEnd
 0
 BLOCK
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbEntity
 8
@@ -63,7 +64,7 @@ AcDbBlockBegin
 0
 ENDBLK
 5
-${to_hex(handle())}
+${utils.to_hex(utils.handle())}
 100
 AcDbEntity
 8
@@ -71,4 +72,6 @@ AcDbEntity
 100
 AcDbBlockEnd
 0
-ENDSEC
+ENDSEC">
+	<#return str>
+</#function>
