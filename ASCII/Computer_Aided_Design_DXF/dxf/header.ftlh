@@ -21,6 +21,12 @@
 19 = Light years
 20 = Parsecs  (no kidding)
 -->
+
+<#assign unit = 0>
+
+<#function to_string>
+	<#assign str = "999
+Java-Applied-Geodesy-3D
 0
 SECTION
 2
@@ -29,31 +35,15 @@ HEADER
 $ACADVER
 1
 AC1021
-<#-- 
 9
 $HANDSEED
 5
-2e
--->
+${utils.to_hex(utils.handle())}
 9
-<#if unit_type_length??>
 $INSUNITS
 70
-	<#if unit_type_length?lower_case == 'inch'>
-1
-	<#elseif unit_type_length?lower_case == 'foot'>
-2
-	<#elseif unit_type_length?lower_case == 'millimeter'>
-4
-	<#elseif unit_type_length?lower_case == 'meter'>
-6
-	<#elseif unit_type_length?lower_case == 'nanometer'>
-12
-	<#elseif unit_type_length?lower_case == 'micrometer'>
-13
-	<#else>
+${unit}
 0
-	</#if>
-</#if>
-0
-ENDSEC
+ENDSEC">
+	<#return str>
+</#function>
