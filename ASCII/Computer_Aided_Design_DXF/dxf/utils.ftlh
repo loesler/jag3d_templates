@@ -209,13 +209,13 @@ ${print_formatted_number(Math.cos(alpha) * a)}
 21
 ${print_formatted_number(Math.sin(alpha) * a)}
 31
-${print_formatted_number(0)}
+0.0
 40
 ${print_formatted_number(b / a)}
 41
 0.0
 42
-6.28318530718
+${print_formatted_number(Math.PI)}
 0">
 	<#return str>
 </#function>
