@@ -31,9 +31,9 @@
 
 
 
-<#function add_layer name line_type='Solid' line_width=-3 color=0>
+<#function add_layer name line_type='CONTINUOUS' line_width=-3 color=9>
 	<#if color?floor lt 0 || color?floor gt 256>
-		<#assign color = 0>
+		<#assign color = 9>
 	</#if>
 	
 	<#assign str = "LAYER
@@ -60,7 +60,7 @@ ${color?floor}
 </#function>
 
 
-<#function add_point x y z layer='0' line_type='Solid' line_width=-1 color=1>
+<#function add_point x y z layer='0' line_type='CONTINUOUS' line_width=-1 color=256>
 	<#if color?floor lt 0 || color?floor gt 256>
 		<#assign color = 256>
 	</#if>
@@ -91,7 +91,7 @@ ${print_formatted_number(z)}
 </#function>
 
 
-<#function add_line x1 y1 z1 x2 y2 z2 layer='0' line_type='Solid' line_width=-1 color=256>
+<#function add_line x1 y1 z1 x2 y2 z2 layer='0' line_type='CONTINUOUS' line_width=-1 color=256>
 	<#if color?floor lt 0 || color?floor gt 256>
 		<#assign color = 256>
 	</#if>
@@ -128,7 +128,7 @@ ${print_formatted_number(z2)}
 </#function>
 
 
-<#function add_text x y z text layer='0' capital_height=10.0 line_type='Solid' line_width=-1 color=256>
+<#function add_text x y z text layer='0' capital_height=10.0 line_type='CONTINUOUS' line_width=-1 color=256>
 	<#if color?floor lt 0 || color?floor gt 256>
 		<#assign color = 256>
 	</#if>
@@ -178,7 +178,7 @@ AcDbText
 
 
 
-<#function add_ellipse x y z a b alpha layer='0' line_type='Solid' line_width=-1 color=256>
+<#function add_ellipse x y z a b alpha layer='0' line_type='CONTINUOUS' line_width=-1 color=256>
 	<#if color?floor lt 0 || color?floor gt 256>
 		<#assign color = 256>
 	</#if>
@@ -215,7 +215,7 @@ ${print_formatted_number(b / a)}
 41
 0.0
 42
-${print_formatted_number(Math.PI)}
+${print_formatted_number(2.0 * Math.PI)}
 0">
 	<#return str>
 </#function>

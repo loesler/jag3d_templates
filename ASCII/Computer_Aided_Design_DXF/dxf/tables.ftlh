@@ -3,11 +3,11 @@
 <#assign viewport_center_scale = 1000.0>
 
 <#assign dxf_layers = [
-    {"name" : "0",            "line_type": "Solid", "line_width": -3, "color" : 0},
-    {"name" : "Coordinates",  "line_type": "Solid", "line_width": -3, "color" : 0},
-    {"name" : "Observations", "line_type": "Solid", "line_width": -3, "color" : 0},
-    {"name" : "Names",        "line_type": "Solid", "line_width": -3, "color" : 0},
-    {"name" : "Confidences",  "line_type": "Solid", "line_width": -3, "color" : 0}
+    {"name" : "0",            "line_type": "CONTINUOUS", "line_width": -3, "color" : 9},
+    {"name" : "Coordinates",  "line_type": "CONTINUOUS", "line_width": -3, "color" : 9},
+    {"name" : "Observations", "line_type": "CONTINUOUS", "line_width": -3, "color" : 9},
+    {"name" : "Names",        "line_type": "CONTINUOUS", "line_width": -3, "color" : 9},
+    {"name" : "Confidences",  "line_type": "CONTINUOUS", "line_width": -3, "color" : 9}
 ]>
 
 
@@ -73,7 +73,7 @@ AcDbSymbolTableRecord
 100
 AcDbLinetypeTableRecord
 2
-Solid
+CONTINUOUS
 70
 0
 72
@@ -81,7 +81,7 @@ Solid
 73
 0
 3
-
+Solid line
 0
 LTYPE
 5
@@ -99,7 +99,7 @@ ByBlock
 73
 0
 3
-
+Solid line
 0
 LTYPE
 5
@@ -117,7 +117,7 @@ ByLayer
 73
 0
 3
-
+Solid line
 0
 ENDTAB
 0
