@@ -14,13 +14,13 @@ ENTITIES
 						<#assign str += utils.add_point(point.y, point.x, point.z, "Coordinates") + "\r\n">
 						<#assign str += utils.add_text(point.y, point.x, point.z, point.name, "Names", 10.0) + "\r\n">
 						<#if group.type != "REFERENCE_POINT">
-							<#assign helmert_major_axis = vector_scale * point.helmert_major_axis * unit_conversion_length_uncertainty / unit_conversion_length>
-							<#assign helmert_minor_axis = vector_scale * point.helmert_minor_axis * unit_conversion_length_uncertainty / unit_conversion_length>
-							<#assign helmert_alpha      = 1.5*Math.PI - point.helmert_alpha * unit_conversion_angle>
-							<#if group.dimension != 1 && helmert_minor_axis gt 0>
-								<#assign str += utils.add_ellipse(point.y, point.x, point.z, helmert_major_axis, helmert_minor_axis, helmert_alpha, "Confidences") + "\r\n">
-							<#elseif group.dimension == 1 || helmert_minor_axis == 0>
-								<#assign str += utils.add_line(point.y,  (point.x - 0.5*helmert_major_axis),  point.z,  point.y,  (point.x + 0.5*helmert_major_axis), point.z, "Confidences") + "\r\n">
+							<#assign confidence_ellipse_major_axis = vector_scale * point.confidence_ellipse_major_axis * unit_conversion_length_uncertainty / unit_conversion_length>
+							<#assign confidence_ellipse_minor_axis = vector_scale * point.confidence_ellipse_minor_axis * unit_conversion_length_uncertainty / unit_conversion_length>
+							<#assign confidence_ellipse_angle      = 1.5*Math.PI - point.confidence_ellipse_angle * unit_conversion_angle>
+							<#if group.dimension != 1 && confidence_ellipse_minor_axis gt 0>
+								<#assign str += utils.add_ellipse(point.y, point.x, point.z, confidence_ellipse_major_axis, confidence_ellipse_minor_axis, confidence_ellipse_angle, "Confidences") + "\r\n">
+							<#elseif group.dimension == 1 || confidence_ellipse_minor_axis == 0>
+								<#assign str += utils.add_line(point.y,  (point.x - 0.5*confidence_ellipse_major_axis),  point.z,  point.y,  (point.x + 0.5*confidence_ellipse_major_axis), point.z, "Confidences") + "\r\n">
 							</#if>
 						</#if>
 					</#list>
